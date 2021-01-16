@@ -2,6 +2,15 @@ html {
     width: 100%;
 }
 
+.view-wrapper {
+    padding-top: 4rem;
+    background-color: #F5F6F8;
+}
+
+.header-wrapper{
+    background-color: #5865E0;
+}
+
 .devjobs {
     width: 100%;
     display: flex;
@@ -9,7 +18,6 @@ html {
     justify-content: space-between;
     align-items: center;
     height: 90px;
-    background-color: #5865E0;
     padding: 0 1.875rem;
     overflow: hidden;
 }
@@ -23,7 +31,13 @@ html {
     padding-right: 4rem;
 }
 
+.filter-wrap {
+    display: flex;
+    justify-content: space-around;
+}
+
 .filter-container {
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -36,4 +50,18 @@ html {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+}
+
+.job-cards {
+    margin: 1.875rem 6rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 4rem;
+}
+
+.job-body {
+    cursor: pointer;
 }

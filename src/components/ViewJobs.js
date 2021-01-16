@@ -1,53 +1,41 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
+import Card from 'react-bootstrap/Card';
 
 class ViewJobs extends Component {
+    constructor(props) {
+		super(props);
+		
+		this.state = {
+            selectedJob: {},
+            showViewJobs: true
+		}
+	}
 
-    state = {
-        jobs: [
-            {title: 'Front End DEV 1', company: 'abc', location: 'xyz'},
-            {title: 'Front End DEV 2', company: 'abc', location: 'xyz'},
-            {title: 'Front End DEV 3', company: 'abc', location: 'xyz'},
-            {title: 'Front End DEV 4', company: 'abc', location: 'xyz'}
-        ],
-    }
-
-    getJob = (event) => {
-        console.log("hi",event.currentTarget.getAttribute('title'))
-        let jobId = event.currentTarget.id
-        let jobName = this.state.jobs
-        jobName = event.currentTarget.getAttribute('title')
-
-        this.setState({
-            jobs: jobId,
-        })
+    getJob = (job) => {
+        console.log("selected job ", job);
     }
 
     render() {
         return (
-            <div className="wrapper">
-                <div className="filter-container">
-                    <div className="filter-search">
-
-                    </div>
-                    <div className="filter-location">
-
-                    </div>
-                    <div className="filter-fulltime">
-                        <div>
-                            <input type="checkbox" name="fulltime"  />
-                        </div>
-                    </div>
-                </div>
+            <div className="view-wrapper">
                 <div className="product-list">
-                    Jobs cards
-                    {   this.state.jobs.map((item, index) => {
-                            return(
-                                <div className="prod" name={item.title} id={`prod-${index}`}  key={index} onClick={this.getJob}>
-                                    {item.title}
-                                </div>
-                            )
-                        })
-                    }
+                        <div className="job-cards">
+                            {
+                                this.props.jobs.map((item, index) => {
+                                    return(
+                                        <Card style={{ width: '18rem', height: '255px' }} name={item.title} id={`job-${item.id}`}  key={index}>
+                                            <Card.Body className="job-body" onClick={e => this.getJob(item)}>
+                                                <Card.Subtitle className="mb-2 text-muted">{item.created_at} - {item.type}</Card.Subtitle>
+
+                                                <Card.Title>{item.title}</Card.Title>
+                                                <Card.Subtitle className="mb-2 text-muted">{item.company}</Card.Subtitle>
+                                                <Card.Link href="#">{item.location}</Card.Link>
+                                            </Card.Body>
+                                        </Card>
+                                    )
+                                })
+                            }
+                        </div>                                
                 </div>               
             </div>
         );
