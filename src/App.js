@@ -13,7 +13,6 @@ class App extends Component {
     .then((res) => res.json())
     .then(resJSON => {
       
-      console.log("in fetch ", resJSON);
       if(resJSON && resJSON.length > 0) {
         this.setState({
           jobs: resJSON
@@ -28,7 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <ViewJobs />
+        <ViewJobs jobs={this.state.jobs}/>
       </div>
     );
   }
