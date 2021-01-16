@@ -7,6 +7,11 @@ html {
     background-color: #F5F6F8;
 }
 
+.view-wrapper-dark {
+    padding-top: 4rem;
+    background-color: #131822;
+}
+
 .header-wrapper{
     background-color: #5865E0;
 }
@@ -27,6 +32,14 @@ html {
     font-size: .1.125rem;
 }
 
+.light-text {
+    color: black;
+}
+
+.dark-text {
+    color: #FFFFFF;
+}
+
 .toggleTheme {
     padding-right: 4rem;
 }
@@ -45,6 +58,10 @@ html {
     background-color: #FFFFFF;
 }
 
+.filter-container-dark {
+    background-color: #19212D;
+}
+
 .filter-fulltime {
     display: flex;
     flex-direction: row;
@@ -60,6 +77,14 @@ html {
     justify-content: space-evenly;
     align-items: center;
     gap: 4rem;
+}
+
+.light-card {
+    background-color: #FFFFFF;
+}
+
+.dark-card {
+    background-color: #19212D !important;
 }
 
 .job-body {

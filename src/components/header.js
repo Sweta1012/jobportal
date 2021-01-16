@@ -2,28 +2,9 @@ import React, {Component} from 'react';
 import './ViewJob.css';
 
 class Header extends Component {
-
-    state = {
-        theme: 'light'
-    }
-
-    changeTheme = () => {
-        let theme =this.state.theme;
-
-        if(theme === 'light') {
-            theme = 'dark';
-
-            this.setState({
-                theme
-            })
-        } else {
-            theme = 'light';
-
-            this.setState({
-                theme
-            })
-        }
-    }
+    constructor(props) {
+		super(props);
+	}
 
     render() {
         return (
@@ -31,13 +12,13 @@ class Header extends Component {
                 <div className="devjobs">
                     <h3 className="text">devjobs</h3>
                     <div className="toggleTheme">
-                        <input type="checkbox" id="theme" name="theme" onClick={this.changeTheme} /> <label className="text">Light / Dark</label>
+                        <input type="checkbox" id="theme" name="theme" onClick={this.props.changeTheme} /> <label className="text">Light / Dark</label>
                     </div>
                 </div>     
                 <div className="filter-wrap">
-                    <div className="filter-container">
+                    <div className={this.props.theme === 'light' ? 'filter-container' : 'filter-container filter-container-dark'}>
                         <div className="filter-search">
-
+                            <input />
                         </div>
                         <div className="filter-location">
 

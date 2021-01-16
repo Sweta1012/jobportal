@@ -15,7 +15,8 @@ class App extends Component {
       
       if(resJSON && resJSON.length > 0) {
         this.setState({
-          jobs: resJSON
+          jobs: resJSON,
+          theme: 'light'
         })
       }
 
@@ -23,11 +24,29 @@ class App extends Component {
     })   
   }
 
+  changeTheme = () => {
+    let theme =this.state.theme;
+
+    if(theme === 'light') {
+        theme = 'dark';
+
+        this.setState({
+            theme
+        })
+    } else {
+        theme = 'light';
+
+        this.setState({
+            theme
+        })
+    }
+}
+
   render() {
     return (
       <div className="App">
-        <Header />
-        <ViewJobs jobs={this.state.jobs}/>
+        <Header theme={this.state.theme} changeTheme={this.changeTheme}/>
+        <ViewJobs jobs={this.state.jobs} theme={this.state.theme}/>
       </div>
     );
   }
