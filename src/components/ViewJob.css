@@ -1,0 +1,39 @@
+html {
+    width: 100%;
+}
+
+.devjobs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    background-color: #5865E0;
+    padding: 0 1.875rem;
+    overflow: hidden;
+}
+
+.text {
+    color: white;
+    font-size: .1.125rem;
+}
+
+.toggleTheme {
+    padding-right: 4rem;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.filter-fulltime {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
