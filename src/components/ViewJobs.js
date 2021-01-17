@@ -6,7 +6,7 @@ function ViewJobs(props) {
 
     const viewJob = (job) => {
         props.viewJob(job);
-        props.history.push('/jobDetail');
+        props.history.push(`/jobDetail/${job.id}`);
     }
 
     return (

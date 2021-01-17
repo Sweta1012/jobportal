@@ -37,7 +37,7 @@ html {
 }
 
 .dark-text {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .toggleTheme {
@@ -114,4 +114,15 @@ html {
 
 button.MuiButton-root {
     margin-right: 1rem;
+}
+
+.MuiSvgIcon-root {
+    height: .8em !important;
+}
+.theme-icon{
+    fill: #FFFFFF !important;
+}
+.MuiInputLabel-animated {
+    color: #5865E0 !important;
+    font-size: 12px !important;
 }

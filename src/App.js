@@ -3,7 +3,7 @@ import './App.css';
 import ViewJobs from './components/ViewJobs';
 import JobDetail from './components/ViewJobs';
 import Header from './components/header';
-import { NavLink, Redirect, Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 class App extends Component {
 
   state = {
@@ -48,8 +48,8 @@ class App extends Component {
       
       if(resJSON && resJSON.length > 0) {
         this.setState({
-          originalJobs: resJSON,
-          jobs: resJSON,
+          originalJobs: [...this.state.originalJobs, ...resJSON],
+          jobs: [...this.state.jobs, ...resJSON],
           isLoadMore: resJSON.length < 50 ? false : true
         })
       }
@@ -148,13 +148,15 @@ class App extends Component {
         <div className="App">
           <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} />
 
-          <Route path='/' exact render={({history}) => {
-              return <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore} viewJob={this.viewJob} history={history}/>
-            }} /> 
+          <Switch>
+            <Route path='/' exact render={({history}) => {
+                return <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore} viewJob={this.viewJob} history={history}/>
+              }} /> 
 
-          <Route path="/jobDetail" render={({history}) => {
-                  return <JobDetail theme={this.state.theme} history={history} selectedJob={this.state.selectedJob}/>
-                }} exact />
+            <Route path="/jobDetail/:id" render={({history}) => {
+                return <JobDetail theme={this.state.theme} history={history} selectedJob={this.state.selectedJob}/>
+              }} />
+          </Switch>
           
           {/* <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore}/> */}
         </div>
