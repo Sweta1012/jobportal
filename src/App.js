@@ -8,7 +8,9 @@ class App extends Component {
     originalJobs: [],
     jobs: [],
     theme: 'light',
-    page: 1
+    page: 1,
+    latitude: null,
+    longitude: null,
   }
 
   componentDidMount() {
@@ -29,8 +31,8 @@ class App extends Component {
     // })  
     
     this.getGithubJobs();
+    this.getLocation();
   }
-
   getGithubJobs = () => {
     fetch(`/positions.json?page=${this.state.page}&search=code`)
     .then((res) => res.json())
@@ -61,17 +63,46 @@ class App extends Component {
         })
     }
   }
+  getLocation = () => {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getCoordinates);
+    }
+  }
+  getCoordinates = (position) => {
+    if(position.coords.latitude && position.coords.longitude) {
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      })
+
+      this.getUserLocation();
+    }
+  }
+  getUserLocation = () => {
+    const API_KEY = 'AIzaSyDSsfy9NRNOQL5tLRAPaGweVtcJ8hy5xNs';
+
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.latitude},${this.state.longitude}&key=${API_KEY}`)
+    .then(resp => resp.json())
+    .then(data => {
+      let userLocation = data.results.length > 0 ? data.results[6].formatted_address : '';
+
+      if(userLocation) {
+          // this.filterJobs(null, null, userLocation);
+      }
+    })
+    .catch(error => console.log("error occured while getting user location ", error));
+  }
   filterJobs = (search, onlyFullTime, location) => {
     let originalJobs = this.state.originalJobs;
-    let filteredJobs = this.state.originalJobs.filter((item, index) => {
+    let filteredJobs = originalJobs.filter((item, index) => {
       if(onlyFullTime && (search !== '' || location !== '')) {
         console.log("1 ");
 
-        return item.type === 'Full Time' && (item.location == location || item.title == search || item.company == search);
+        return item.type === 'Full Time' && (item.location === location || item.title === search || item.company === search);
       } else if(!onlyFullTime && (search !== '' || location !== '')) {
-        console.log("2 ");
+        console.log("in location");
 
-        return item.location == location || item.title == search || item.company == search;
+        return item.location === location || item.title === search || item.company === search;
       } else if(onlyFullTime && search === '' && location === '') {
         console.log("3 ");
 
@@ -83,9 +114,10 @@ class App extends Component {
       }
     });
 
-    console.log("filtered jovbs ", filteredJobs);
+    console.log("filtered jobs ", filteredJobs);
 
     if(!onlyFullTime && !search && !location) {
+      console.log("in this ", this.state.originalJobs);
       this.setState({
         jobs: originalJobs
       })
@@ -96,7 +128,6 @@ class App extends Component {
     }
   }
   loadMore = () => {
-    console.log("in load more");
     let page = this.state.page + 1;
 
     this.setState({
