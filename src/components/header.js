@@ -40,7 +40,7 @@ function Header(props) {
             </div>     
             <div className="filter-wrap">
                 <div className={props.theme === 'light' ? 'filter-container' : 'filter-container filter-container-dark'}>
-                    <div className={classes.margin}>
+                    <div className={classes.margin, 'filter-fields'}>
                         <Grid container spacing={1} alignItems="flex-end">
                         <Grid item>
                             <SearchIcon />
@@ -53,7 +53,7 @@ function Header(props) {
 
                     <Divider orientation="vertical" flexItem />
 
-                    <div className={classes.margin}>
+                    <div className={classes.margin, 'filter-fields'}>
                         <Grid container spacing={1} alignItems="flex-end">
                         <Grid item>
                             <LocationOnIcon color="secondary"/>

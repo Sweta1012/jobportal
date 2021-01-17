@@ -99,3 +99,19 @@ html {
     justify-content: space-around;
     padding: 2rem;
 }
+
+.filter-fields {
+    padding: .5rem 1.875rem 1.875rem;
+}
+
+.MuiFormControlLabel-root {
+    margin-left: 1rem !important;
+    padding-top: .5rem;
+}
+.MuiTypography-body1, .MuiButton-label {
+    font-size: 14px !important;
+}
+
+button.MuiButton-root {
+    margin-right: 1rem;
+}
