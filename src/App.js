@@ -11,6 +11,7 @@ class App extends Component {
     page: 1,
     latitude: null,
     longitude: null,
+    isLoadMore: true
   }
 
   componentDidMount() {
@@ -34,7 +35,7 @@ class App extends Component {
     this.getLocation();
   }
   getGithubJobs = () => {
-    fetch(`/positions.json?page=${this.state.page}&search=code`)
+    fetch(`/positions.json?page=${this.state.page}`)
     .then((res) => res.json())
     .then(resJSON => {
       
@@ -42,6 +43,7 @@ class App extends Component {
         this.setState({
           originalJobs: [...this.state.originalJobs ,resJSON],
           jobs: resJSON,
+          isLoadMore: resJSON.length < 50 ? false : true
         })
       }
     }) 
@@ -141,7 +143,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} />
-        <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} />
+        <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore}/>
       </div>
     );
   }

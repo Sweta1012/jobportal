@@ -56,6 +56,8 @@ html {
     justify-content: space-evenly;
     align-items: center;
     background-color: #FFFFFF;
+    margin-bottom: -2rem;
+    border-radius: .25rem;
 }
 
 .filter-container-dark {
@@ -77,6 +79,7 @@ html {
     justify-content: space-evenly;
     align-items: center;
     gap: 4rem;
+    padding-bottom: 1rem;
 }
 
 .light-card {
@@ -89,4 +92,10 @@ html {
 
 .job-body {
     cursor: pointer;
+}
+
+.loadmore-wrap {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
 }
