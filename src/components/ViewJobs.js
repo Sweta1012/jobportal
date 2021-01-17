@@ -5,9 +5,8 @@ import Button from '@material-ui/core/Button';
 function ViewJobs(props) {
 
     const viewJob = (job) => {
-        console.log("selected job ", job);
-        console.log("selected theme ", props.theme);
-        // props.history.push('/jobDetail');
+        props.viewJob(job);
+        props.history.push('/jobDetail');
     }
 
     return (

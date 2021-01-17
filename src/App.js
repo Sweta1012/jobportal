@@ -1,12 +1,15 @@
 import { Component } from 'react';
 import './App.css';
 import ViewJobs from './components/ViewJobs';
+import JobDetail from './components/ViewJobs';
 import Header from './components/header';
+import { NavLink, Redirect, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 class App extends Component {
 
   state = {
     originalJobs: [],
     jobs: [],
+    selectedJob: {},
     theme: 'light',
     page: 1,
     latitude: null,
@@ -30,18 +33,22 @@ class App extends Component {
 
     //   console.log("theme thre ? ", this.changeTheme);
     // })  
+
+    console.log("satte page ", this.state.page);
     
-    this.getGithubJobs();
+    this.getGithubJobs(this.state.page);
     this.getLocation();
   }
-  getGithubJobs = () => {
-    fetch(`/positions.json?page=${this.state.page}`)
+  getGithubJobs = (page) => {
+    console.log("api ", page);
+
+    fetch(`/positions.json?page=${page}`)
     .then((res) => res.json())
     .then(resJSON => {
       
       if(resJSON && resJSON.length > 0) {
         this.setState({
-          originalJobs: [...this.state.originalJobs ,resJSON],
+          originalJobs: resJSON,
           jobs: resJSON,
           isLoadMore: resJSON.length < 50 ? false : true
         })
@@ -95,31 +102,24 @@ class App extends Component {
     .catch(error => console.log("error occured while getting user location ", error));
   }
   filterJobs = (search, onlyFullTime, location) => {
+    console.log("in filter ", search, onlyFullTime, location);
+    let searchParam = search ? search.toLowerCase() : '';
+    let locationParam = location ? location.toLowerCase() : '';
+
     let originalJobs = this.state.originalJobs;
     let filteredJobs = originalJobs.filter((item, index) => {
-      if(onlyFullTime && (search !== '' || location !== '')) {
-        console.log("1 ");
-
-        return item.type === 'Full Time' && (item.location === location || item.title === search || item.company === search);
-      } else if(!onlyFullTime && (search !== '' || location !== '')) {
-        console.log("in location");
-
-        return item.location === location || item.title === search || item.company === search;
-      } else if(onlyFullTime && search === '' && location === '') {
-        console.log("3 ");
-
+      if(onlyFullTime && (searchParam !== '' || locationParam !== '')) {
+        return item.type === 'Full Time' && (item.location.toLowerCase() === locationParam || item.title.toLowerCase() === searchParam || item.company.toLowerCase() === searchParam);
+      } else if(!onlyFullTime && (searchParam !== '' || locationParam !== '')) {
+        return item.location.toLowerCase() === locationParam || item.title.toLowerCase() === searchParam || item.company.toLowerCase() === searchParam;
+      } else if(onlyFullTime && searchParam === '' && locationParam === '') {
         return item.type === 'Full Time';
       } else {
-        console.log("4 ");
-
         return item;
       }
     });
 
-    console.log("filtered jobs ", filteredJobs);
-
     if(!onlyFullTime && !search && !location) {
-      console.log("in this ", this.state.originalJobs);
       this.setState({
         jobs: originalJobs
       })
@@ -136,15 +136,29 @@ class App extends Component {
       page
     })
 
-    this.getGithubJobs();
+    this.getGithubJobs(page);
+  }
+  viewJob = (job) => {
+    console.log("selected job ", job);
   }
 
   render() {
     return (
-      <div className="App">
-        <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} />
-        <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore}/>
-      </div>
+      <Router>
+        <div className="App">
+          <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} />
+
+          <Route path='/' exact render={({history}) => {
+              return <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore} viewJob={this.viewJob} history={history}/>
+            }} /> 
+
+          <Route path="/jobDetail" render={({history}) => {
+                  return <JobDetail theme={this.state.theme} history={history} selectedJob={this.state.selectedJob}/>
+                }} exact />
+          
+          {/* <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore}/> */}
+        </div>
+      </Router>
     );
   }
 }
