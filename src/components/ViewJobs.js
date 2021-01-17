@@ -32,6 +32,8 @@ function ViewJobs(props) {
                                     )
                                 })
                             }
+
+                            <button onClick={props.loadMore} >Load More</button>
                         </div>   
                         :  <div>
                             No Jobs Found Matching Your Criteria

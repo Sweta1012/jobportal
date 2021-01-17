@@ -7,26 +7,43 @@ class App extends Component {
   state = {
     originalJobs: [],
     jobs: [],
-    theme: 'light'
+    theme: 'light',
+    page: 1
   }
 
   componentDidMount() {
-    fetch('/positions.json?page=1&search=code')
+    // fetch('/positions.json?page=1&search=code')
+    // .then((res) => res.json())
+    // .then(resJSON => {
+      
+    //   if(resJSON && resJSON.length > 0) {
+    //     this.setState({
+    //       originalJobs: resJSON,
+    //       jobs: resJSON,
+    //       theme: 'light',
+    //       page: 1
+    //     })
+    //   }
+
+    //   console.log("theme thre ? ", this.changeTheme);
+    // })  
+    
+    this.getGithubJobs();
+  }
+
+  getGithubJobs = () => {
+    fetch(`/positions.json?page=${this.state.page}&search=code`)
     .then((res) => res.json())
     .then(resJSON => {
       
       if(resJSON && resJSON.length > 0) {
         this.setState({
-          originalJobs: resJSON,
+          originalJobs: [...this.state.originalJobs ,resJSON],
           jobs: resJSON,
-          theme: 'light'
         })
       }
-
-      console.log("jobs ", this.state.jobs);
-    })   
+    }) 
   }
-
   changeTheme = () => {
     let theme =this.state.theme;
 
@@ -44,7 +61,6 @@ class App extends Component {
         })
     }
   }
-
   filterJobs = (search, onlyFullTime, location) => {
     let originalJobs = this.state.originalJobs;
     let filteredJobs = this.state.originalJobs.filter((item, index) => {
@@ -79,12 +95,22 @@ class App extends Component {
       })
     }
   }
+  loadMore = () => {
+    console.log("in load more");
+    let page = this.state.page + 1;
+
+    this.setState({
+      page
+    })
+
+    this.getGithubJobs();
+  }
 
   render() {
     return (
       <div className="App">
         <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} />
-        <ViewJobs jobs={this.state.jobs} theme={this.state.theme}/>
+        <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} />
       </div>
     );
   }
