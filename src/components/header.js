@@ -4,7 +4,15 @@ import './ViewJob.css';
 class Header extends Component {
     constructor(props) {
 		super(props);
-	}
+    }
+    
+    filterJobs = () => {
+        let searchValue = document.getElementById('search').value;
+        let type = document.getElementById('fulltime').checked;
+        let location = document.getElementById('location').value;
+
+        this.props.filterJobs(searchValue, type, location);
+    }
 
     render() {
         return (
@@ -18,16 +26,20 @@ class Header extends Component {
                 <div className="filter-wrap">
                     <div className={this.props.theme === 'light' ? 'filter-container' : 'filter-container filter-container-dark'}>
                         <div className="filter-search">
-                            <input />
+                            <input type="text" name="search" id="search" />
                         </div>
                         <div className="filter-location">
-
+                            <input type="text" name="location" id="location" />
                         </div>
                         <div className="filter-fulltime">
                             <div>
-                                <input type="checkbox" name="fulltime"  />
+                                <input type="checkbox" name="fulltime" id="fulltime" />
                             </div>
                         </div>
+                    </div>
+
+                    <div> 
+                        <button onClick={this.filterJobs}>search</button>
                     </div>
                 </div>          
             </div>
