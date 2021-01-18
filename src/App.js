@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './App.scss';
 import ViewJobs from './components/ViewJobs';
 import Header from './components/header';
+import axios from 'axios';
 // import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 class App extends Component {
 
@@ -22,8 +23,24 @@ class App extends Component {
     this.getLocation();
   }
   getGithubJobs = (page) => {
-    fetch(`https://jobs.github.com/positions.json?page=${page}`)
-    .then((res) => res.json())
+    // fetch(`/positions.json?page=${page}`)
+    // .then((res) => res.JSON)
+    // .then(resJSON => {
+      
+    //   if(resJSON && resJSON.length > 0) {
+    //     this.setState({
+    //       originalJobs: [...this.state.originalJobs, ...resJSON],
+    //       jobs: [...this.state.jobs, ...resJSON],
+    //       isLoadMore: resJSON.length < 50 ? false : true
+    //     })
+    //   }
+    // })
+
+    axios.get(`https://jobs.github.com/positions.json?page=${page}`, {
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      }
+     })
     .then(resJSON => {
       
       if(resJSON && resJSON.length > 0) {
