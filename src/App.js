@@ -136,7 +136,7 @@ class App extends Component {
 
   render() {
     return (
-        <div className="App">
+        <div className={this.state.theme === 'light' ? 'light-theme' : 'dark-theme'}>
           <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} isFilterPanel={this.state.isFilterPanel} selectedJob={this.state.selectedJob} goBack={this.goBack} />
 
             {/* <Route path='/' exact render={({history}) => {
