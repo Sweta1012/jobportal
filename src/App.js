@@ -24,7 +24,7 @@ class App extends Component {
   }
   getGithubJobs = (page) => {
     // fetch(`/positions.json?page=${page}`)
-    // .then((res) => res.JSON)
+    // .then((res) => res.json())
     // .then(resJSON => {
       
     //   if(resJSON && resJSON.length > 0) {
@@ -42,12 +42,13 @@ class App extends Component {
       }
      })
     .then(resJSON => {
-      
-      if(resJSON && resJSON.length > 0) {
+      console.log("resJSon ", resJSON);
+      if(resJSON.data && resJSON.data.length > 0) {
+        let data = resJSON.data;
         this.setState({
-          originalJobs: [...this.state.originalJobs, ...resJSON],
-          jobs: [...this.state.jobs, ...resJSON],
-          isLoadMore: resJSON.length < 50 ? false : true
+          originalJobs: [...this.state.originalJobs, ...data],
+          jobs: [...this.state.jobs, ...data],
+          isLoadMore: data.length < 50 ? false : true
         })
       }
     }) 
