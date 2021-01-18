@@ -22,7 +22,7 @@ class App extends Component {
     this.getLocation();
   }
   getGithubJobs = (page) => {
-    fetch(`/positions.json?page=${page}`)
+    fetch(`https://jobs.github.com/positions.json?page=${page}`)
     .then((res) => res.json())
     .then(resJSON => {
       
