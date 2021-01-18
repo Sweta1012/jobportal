@@ -80,7 +80,7 @@ function ViewJobs(props) {
                                         <Card style={{ marginTop: '5rem', marginBottom: '5rem' }} className="how-to-apply" name={item.title} id={`job-${item.id}`}>
                                             <Card.Body className="job-body">
                                                 <div>
-                                                    <Card.Title style={{ marginBottom: '0' }} className="'dark-text">How To Apply</Card.Title>
+                                                    <Card.Title style={{ marginBottom: '1.875rem', fontSize: '22px' }} className="dark-text">How To Apply</Card.Title>
                                                 </div>
                                                    
                                                 <div>

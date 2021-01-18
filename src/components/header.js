@@ -137,6 +137,7 @@ function Header(props) {
                         <Divider orientation="vertical" flexItem />
 
                         <FormControlLabel
+                            className={props.theme === 'dark' ? 'fulltime-checkbox' : ''}
                             control={
                             <Checkbox
                                 name="fulltime"
