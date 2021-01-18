@@ -36,7 +36,7 @@ class App extends Component {
     //   }
     // })
 
-    axios.get(`https://jobs.github.com/positions.json?page=${page}`, {
+    axios.get(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?page=${page}`, {
       headers: {
         "Access-Control-Allow-Origin": "*"
       }
