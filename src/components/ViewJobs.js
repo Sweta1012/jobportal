@@ -53,7 +53,7 @@ function ViewJobs(props) {
 
                 : <div className="job-wrap">
                         {
-                            props.selectedJob.map((item, index) => {
+                            props.selectedJob && props.selectedJob.map((item, index) => {
                                 return (
                                     <div key={index} style={{ width: '70%' }}>
                                         <Card className={props.theme === 'light' ? 'light-card' : 'dark-card'} name={item.title} id={`job-${item.id}`} >

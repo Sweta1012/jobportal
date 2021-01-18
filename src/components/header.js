@@ -155,7 +155,7 @@ function Header(props) {
                 </div>   : 
                 <div className="filter-wrap">
                     {
-                        props.selectedJob.map((item, index) => {
+                        props.selectedJob && props.selectedJob.map((item, index) => {
                             return (
                                 <div key={item.id} className={props.theme === 'light' ? 'job-header' : 'job-header filter-container-dark'}> 
                                     <div className="company-logo">
