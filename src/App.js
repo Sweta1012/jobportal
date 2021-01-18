@@ -82,7 +82,6 @@ class App extends Component {
     .catch(error => console.log("error occured while getting user location ", error));
   }
   filterJobs = (search, onlyFullTime, location) => {
-    console.log("in filter ", search, onlyFullTime, location);
     let searchParam = search ? search.toLowerCase() : '';
     let locationParam = location ? location.toLowerCase() : '';
 
@@ -119,7 +118,6 @@ class App extends Component {
     this.getGithubJobs(page);
   }
   viewJob = (job) => {
-    console.log("selected job ", job);
     let selectedJob = [];
     selectedJob.push(job);
 
