@@ -99,51 +99,68 @@ function Header(props) {
                         </Typography>
                     </FormGroup>
                 </div>
-            </div>     
-            <div className="filter-wrap">
-                <div className={props.theme === 'light' ? 'filter-container' : 'filter-container filter-container-dark'}>
-                    <div className={classes.margin, 'filter-fields'}>
-                        <Grid container spacing={1} alignItems="flex-end">
-                        <Grid item>
-                            <SearchIcon />
-                        </Grid>
-                        <Grid item>
-                            <TextField  name="search" id="search" label="Filter by title, company, skill .." />
-                        </Grid>
-                        </Grid>
-                    </div>
+            </div>   
 
-                    <Divider orientation="vertical" flexItem />
+            {
+                props.isFilterPanel ? <div className="filter-wrap">
+                    <div className={props.theme === 'light' ? 'filter-container' : 'filter-container filter-container-dark'}>
+                        <div className={classes.margin, 'filter-fields'}>
+                            <Grid container spacing={1} alignItems="flex-end">
+                            <Grid item>
+                                <SearchIcon />
+                            </Grid>
+                            <Grid item>
+                                <TextField  name="search" id="search" label="Filter by title, company, skill .." />
+                            </Grid>
+                            </Grid>
+                        </div>
 
-                    <div className={classes.margin, 'filter-fields'}>
-                        <Grid container spacing={1} alignItems="flex-end">
-                        <Grid item>
-                            <LocationOnIcon color="secondary"/>
-                        </Grid>
-                        <Grid item>
-                            <TextField  name="location" id="location" label="Filter by location" className={props.theme === 'dark' ? 'dark-text' : ''} />
-                        </Grid>
-                        </Grid>
-                    </div>
+                        <Divider orientation="vertical" flexItem />
 
-                    <Divider orientation="vertical" flexItem />
+                        <div className={classes.margin, 'filter-fields'}>
+                            <Grid container spacing={1} alignItems="flex-end">
+                            <Grid item>
+                                <LocationOnIcon color="secondary"/>
+                            </Grid>
+                            <Grid item>
+                                <TextField  name="location" id="location" label="Filter by location" className={props.theme === 'dark' ? 'dark-text' : ''} />
+                            </Grid>
+                            </Grid>
+                        </div>
 
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                            name="fulltime"
-                            id="fulltime"
-                            color="primary"
+                        <Divider orientation="vertical" flexItem />
+
+                        <FormControlLabel
+                            control={
+                            <Checkbox
+                                name="fulltime"
+                                id="fulltime"
+                                color="primary"
+                            />
+                            }
+                            label="Full-Time Only"
                         />
-                        }
-                        label="Full-Time Only"
-                    />
 
-                    <Button variant="contained" color="primary" onClick={filterJobs}>
-                        search
-                    </Button>                    
+                        <Button variant="contained" color="primary" onClick={filterJobs}>
+                            search
+                        </Button>                    
+                    </div>
+                </div>   : 
+                <div className="filter-wrap">
+                    {
+                        props.selectedJob.map((item, index) => {
+                            return (
+                                <div key={item.id} className={props.theme === 'light' ? 'filter-container job-header' : 'filter-container filter-container-dark'}> 
+                                    <div className="company-logo">
+                                        <img style={{height: '100px' }} src={item.company_logo} alt={item.company} /> 
+                                    </div>
+                                    <div> Name and Apply </div>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
-            </div>          
+            }  
         </div>
     );
 }

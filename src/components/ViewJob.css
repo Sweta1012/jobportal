@@ -47,6 +47,7 @@ html {
 .filter-wrap {
     display: flex;
     justify-content: space-around;
+    height: 70px;
 }
 
 .filter-container {
@@ -69,6 +70,16 @@ html {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+}
+
+
+.job-header {
+    justify-content: flex-start !important;
+}
+
+.company-logo {
+    height: 100%;
+    width: 25%;
 }
 
 .job-cards {
@@ -125,4 +136,11 @@ button.MuiButton-root {
 .MuiInputLabel-animated {
     color: #5865E0 !important;
     font-size: 12px !important;
+}
+
+.job-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 4rem;
 }

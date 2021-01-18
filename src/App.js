@@ -9,39 +9,20 @@ class App extends Component {
   state = {
     originalJobs: [],
     jobs: [],
-    selectedJob: {},
+    selectedJob: [],
     theme: 'light',
     page: 1,
     latitude: null,
     longitude: null,
-    isLoadMore: true
+    isLoadMore: true,
+    isFilterPanel: true
   }
 
   componentDidMount() {
-    // fetch('/positions.json?page=1&search=code')
-    // .then((res) => res.json())
-    // .then(resJSON => {
-      
-    //   if(resJSON && resJSON.length > 0) {
-    //     this.setState({
-    //       originalJobs: resJSON,
-    //       jobs: resJSON,
-    //       theme: 'light',
-    //       page: 1
-    //     })
-    //   }
-
-    //   console.log("theme thre ? ", this.changeTheme);
-    // })  
-
-    console.log("satte page ", this.state.page);
-    
     this.getGithubJobs(this.state.page);
     this.getLocation();
   }
   getGithubJobs = (page) => {
-    console.log("api ", page);
-
     fetch(`/positions.json?page=${page}`)
     .then((res) => res.json())
     .then(resJSON => {
@@ -140,27 +121,30 @@ class App extends Component {
   }
   viewJob = (job) => {
     console.log("selected job ", job);
+    let selectedJob = [];
+    selectedJob.push(job);
+
+    this.setState({
+      selectedJob,
+      isFilterPanel: false
+    })
   }
 
   render() {
     return (
-      <Router>
         <div className="App">
-          <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} />
+          <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} isFilterPanel={this.state.isFilterPanel} selectedJob={this.state.selectedJob}/>
 
-          <Switch>
-            <Route path='/' exact render={({history}) => {
+            {/* <Route path='/' exact render={({history}) => {
                 return <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore} viewJob={this.viewJob} history={history}/>
               }} /> 
 
             <Route path="/jobDetail/:id" render={({history}) => {
                 return <JobDetail theme={this.state.theme} history={history} selectedJob={this.state.selectedJob}/>
-              }} />
-          </Switch>
+              }} /> */}
           
-          {/* <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore}/> */}
+          <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore} viewJob={this.viewJob} isFilterPanel={this.state.isFilterPanel} selectedJob={this.state.selectedJob} />
         </div>
-      </Router>
     );
   }
 }
