@@ -110,7 +110,7 @@ function Header(props) {
             {
                 props.isFilterPanel ? <div className="filter-wrap">
                     <div className={props.theme === 'light' ? 'filter-container' : 'filter-container filter-container-dark'}>
-                        <div className={classes.margin, 'filter-field-search'}>
+                        <div className={`${classes.margin} filter-field-search`}>
                             <Grid container spacing={1} alignItems="flex-end">
                             <Grid item>
                                 <SearchIcon />
@@ -123,7 +123,7 @@ function Header(props) {
 
                         <Divider orientation="vertical" flexItem />
 
-                        <div className={classes.margin, 'filter-field-location'}>
+                        <div className={`${classes.margin} filter-field-location`}>
                             <Grid container spacing={1} alignItems="flex-end">
                             <Grid item>
                                 <LocationOnIcon color="secondary"/>
@@ -168,7 +168,7 @@ function Header(props) {
                                         </div>
                                         <div>
                                             <button className="site-btn">
-                                                <a>Company Site</a>
+                                                <a target="_blank" rel="noreferrer" href={item.company_url}>Company Site</a>
                                             </button>
                                         </div>
                                     </div>

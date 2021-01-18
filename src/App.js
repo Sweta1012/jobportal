@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './App.scss';
 import ViewJobs from './components/ViewJobs';
 import Header from './components/header';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+// import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 class App extends Component {
 
   state = {

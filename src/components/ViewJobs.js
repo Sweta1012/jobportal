@@ -4,11 +4,6 @@ import Button from '@material-ui/core/Button';
 
 function ViewJobs(props) {
 
-    const viewJob = (job) => {
-        // props.viewJob(job);
-        // props.history.push(`/jobDetail/${job.id}`);
-    }
-
     return (
         <div className={props.theme === 'light' ? 'view-wrapper' : 'view-wrapper-dark'}>
             {
@@ -67,7 +62,7 @@ function ViewJobs(props) {
                                                     </div>
                                                     <div>
                                                         <button className="apply-btn">
-                                                            <a className="apply-link" target="_blank" href={item.url}>Apply Now</a>
+                                                            <a className="apply-link" target="_blank" rel="noreferrer" href={item.url}>Apply Now</a>
                                                         </button>
                                                     </div>
                                                 </div>
