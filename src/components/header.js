@@ -110,7 +110,7 @@ function Header(props) {
             {
                 props.isFilterPanel ? <div className="filter-wrap">
                     <div className={props.theme === 'light' ? 'filter-container' : 'filter-container filter-container-dark'}>
-                        <div className={classes.margin, 'filter-fields'}>
+                        <div className={classes.margin, 'filter-field-search'}>
                             <Grid container spacing={1} alignItems="flex-end">
                             <Grid item>
                                 <SearchIcon />
@@ -123,7 +123,7 @@ function Header(props) {
 
                         <Divider orientation="vertical" flexItem />
 
-                        <div className={classes.margin, 'filter-fields'}>
+                        <div className={classes.margin, 'filter-field-location'}>
                             <Grid container spacing={1} alignItems="flex-end">
                             <Grid item>
                                 <LocationOnIcon color="secondary"/>
@@ -134,7 +134,7 @@ function Header(props) {
                             </Grid>
                         </div>
 
-                        <Divider orientation="vertical" flexItem />
+                        <Divider className="location-divider" orientation="vertical" flexItem />
 
                         <FormControlLabel
                             className={props.theme === 'dark' ? 'fulltime-checkbox' : ''}
@@ -151,13 +151,13 @@ function Header(props) {
                         <Button variant="contained" color="primary" onClick={filterJobs}>
                             search
                         </Button>                    
-                    </div>
+                    </div>                   
                 </div>   : 
                 <div className="filter-wrap">
                     {
                         props.selectedJob.map((item, index) => {
                             return (
-                                <div key={item.id} className={props.theme === 'light' ? 'filter-container job-header' : 'filter-container filter-container-dark'}> 
+                                <div key={item.id} className={props.theme === 'light' ? 'job-header' : 'job-header filter-container-dark'}> 
                                     <div className="company-logo">
                                         <img style={{height: '100px', width: '100%' }} src={item.company_logo} alt={item.company} /> 
                                     </div>

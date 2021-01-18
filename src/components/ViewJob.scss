@@ -1,3 +1,5 @@
+@import '../../node_modules/breakpoint-sass/stylesheets/breakpoint';
+
 .view-wrapper {
     padding-top: 4rem;
     background-color: #F5F6F8;
@@ -56,8 +58,8 @@
 }
 
 .filter-container {
-    width: 80%;
     display: flex;
+    width: 80%;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
@@ -67,7 +69,7 @@
 }
 
 .filter-container-dark {
-    background-color: #19212D;
+    background-color: #19212D !important;
 }
 
 .filter-fulltime {
@@ -84,8 +86,14 @@
 }
 
 .job-header {
-    width: 70% !important;
-    justify-content: flex-start !important;
+    display: flex;
+    width: 70%;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    background-color: #FFFFFF;
+    margin-bottom: -2rem;
+    border-radius: .25rem;
 }
 
 .company-logo {
@@ -103,7 +111,15 @@
 }
 
 .company-title {
-    width: 80%;
+    width: 45%;
+
+    @include breakpoint(800px) {
+        width: 60%;
+    }
+
+    @include breakpoint(1057px) {
+        width: 80%;
+    }
 }
 
 .site-title {
@@ -199,8 +215,25 @@
     padding: 2rem;
 }
 
-.filter-fields {
+.filter-field-search {
     padding: .5rem 1.875rem 1.875rem;
+}
+
+.filter-field-location {
+    display: none !important;
+
+    @include breakpoint(1082px) {
+        padding: .5rem 1.875rem 1.875rem;
+        display: inline-flex !important;
+    }
+}
+
+.location-divider {
+    display: none !important;
+
+    @include breakpoint(1082px) {
+        display: block !important;
+    }
 }
 
 .MuiFormControlLabel-root {
@@ -212,7 +245,16 @@
 }
 
 button.MuiButton-root {
-    margin-right: 1rem;
+    margin-right: .5rem;
+    margin-left: .5rem;
+}
+
+.MuiButton-label {
+    font-size: 12px !important;
+
+    @include breakpoint(1082px) {
+        font-size: 14px !important;
+    }
 }
 
 .MuiSvgIcon-root {
@@ -242,5 +284,13 @@ button.MuiButton-root {
     .MuiSvgIcon-root, .MuiTypography-body1 {
         fill: white;
         color: white;
+    }
+}
+
+.MuiFormControlLabel-root {
+    display: none !important;
+
+    @include breakpoint(800px) {
+        display: inline-flex !important;
     }
 }

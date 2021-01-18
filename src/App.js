@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './App.css';
+import './App.scss';
 import ViewJobs from './components/ViewJobs';
 import Header from './components/header';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
