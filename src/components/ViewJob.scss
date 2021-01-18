@@ -40,6 +40,14 @@ html {
     color: #FFFFFF !important;
 }
 
+.dark-link-text {
+    color: #5865E0;
+}
+
+.site-subtitle {
+    color: #5865E0;
+}
+
 .toggleTheme {
     padding-right: 4rem;
 }
@@ -72,14 +80,90 @@ html {
     align-items: center;
 }
 
+.go-back {
+    width: 20px !important;
+    margin-right: .625rem;
+    cursor: pointer;
+}
 
 .job-header {
+    width: 70% !important;
     justify-content: flex-start !important;
 }
 
 .company-logo {
     height: 100%;
-    width: 25%;
+    width: 15%;
+}
+
+.company-site {
+    width: 85%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-title {
+    width: 80%;
+}
+
+.site-title {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.site-subtitle {
+    font-size: 12px;
+    color: #555;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.site-btn {
+    padding: .625rem;
+    background-color: #bac1fb;
+    color: #3d4cd1;
+    font-weight: bold;
+    font-size: 14px;
+    border: 0;
+    border-radius: .25rem;
+}
+
+.apply-btn {
+    padding: .625rem;
+    background-color: #5865E0;
+    color:white;
+    font-weight: bold;
+    font-size: 14px;
+    border: 0;
+    border-radius: .25rem; 
+}
+
+.apply-link {
+    color:white;
+
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+    a {
+        color:white; 
+
+        &:hover {
+            color: white;
+        }
+    }
+}
+
+.job-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
 }
 
 .job-cards {
@@ -143,4 +227,9 @@ button.MuiButton-root {
     flex-direction: row;
     justify-content: space-around;
     padding-bottom: 4rem;
+}
+
+.how-to-apply {
+    color: white;
+    background-color: #5865E0 !important;
 }

@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import './App.css';
 import ViewJobs from './components/ViewJobs';
-import JobDetail from './components/ViewJobs';
 import Header from './components/header';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 class App extends Component {
@@ -129,11 +128,16 @@ class App extends Component {
       isFilterPanel: false
     })
   }
+  goBack = () => {
+    this.setState({
+      isFilterPanel: true
+    })
+  }
 
   render() {
     return (
         <div className="App">
-          <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} isFilterPanel={this.state.isFilterPanel} selectedJob={this.state.selectedJob}/>
+          <Header theme={this.state.theme} changeTheme={this.changeTheme} filterJobs={this.filterJobs} isFilterPanel={this.state.isFilterPanel} selectedJob={this.state.selectedJob} goBack={this.goBack} />
 
             {/* <Route path='/' exact render={({history}) => {
                 return <ViewJobs jobs={this.state.jobs} theme={this.state.theme} loadMore={this.loadMore} isLoadMore={this.state.isLoadMore} viewJob={this.viewJob} history={history}/>

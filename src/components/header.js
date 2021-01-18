@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import './ViewJob.css';
+import './ViewJob.scss';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
@@ -14,6 +14,7 @@ import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const AntSwitch = withStyles((theme) => ({
     root: {
@@ -80,7 +81,12 @@ function Header(props) {
     return (
         <div className="header-wrapper">
             <div className="devjobs">
-                <h3 className="text">devjobs</h3>
+                <h3 className="text">
+                    {
+                        props.isFilterPanel ? null :  <ArrowBackIcon className="go-back" onClick={props.goBack} />
+                    }
+                   <span>devjobs</span> 
+                </h3>
 
                 <div className="toggleTheme">
                     <FormGroup>
@@ -152,9 +158,19 @@ function Header(props) {
                             return (
                                 <div key={item.id} className={props.theme === 'light' ? 'filter-container job-header' : 'filter-container filter-container-dark'}> 
                                     <div className="company-logo">
-                                        <img style={{height: '100px' }} src={item.company_logo} alt={item.company} /> 
+                                        <img style={{height: '100px', width: '100%' }} src={item.company_logo} alt={item.company} /> 
                                     </div>
-                                    <div> Name and Apply </div>
+                                    <div className="company-site">
+                                        <div className="company-title">
+                                            <h3 className={props.theme === 'light' ? 'site-title' : 'site-title dark-text'}>{item.company}</h3>
+                                            <span className={props.theme === 'light' ? 'site-subtitle' : 'site-subtitle dark-link-text'}>{item.location}</span>
+                                        </div>
+                                        <div>
+                                            <button className="site-btn">
+                                                <a>Company Site</a>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             )
                         })
